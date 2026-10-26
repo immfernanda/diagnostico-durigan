@@ -661,7 +661,7 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
     </div>
     <div class="cem" id="cem" aria-label="Vou ajudar a Durigan a ser encontrada por quem já procura vinho">
       <p class="cem-k">A cada 100 visitas, a Durigan deixa de vender e de impactar positivamente <b>53 pessoas</b>.</p>
-      <div class="cem-top"><b id="stay">0</b><span>pessoas chegando até um vinho da Durigan</span></div>
+      <div class="cem-top"><b id="stay">0</b><span>de 53 pessoas que a Durigan pode recuperar</span></div>
       <div class="dots" id="dots" aria-hidden="true"></div>
       <p class="cem-hint"><span class="pulse"></span><span id="cemHint"></span></p>
       <p class="cem-say">Vou ajudar a Durigan a ser <em>encontrada por quem já procura vinho</em>.</p>
@@ -699,19 +699,16 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
       </article>
       <article class="pain">
         <div class="n"><span>Motivo 2</span><i><svg class="ico"><use href="#i-funnel"/></svg></i></div>
-        <div class="big">0</div>
         <h3>Falta de funil estratégico para a marca</h3>
         <p>Nenhum anúncio no Google e nenhuma ligação entre quem viu a Durigan na Meta e quem procura vinho depois.</p>
       </article>
       <article class="pain">
         <div class="n"><span>Motivo 3</span><i><svg class="ico"><use href="#i-eye"/></svg></i></div>
-        <div class="big">0</div>
         <h3>Ninguém é rastreado</h3>
         <p>Sem Tag Manager nem Google Analytics, quem colocou vinho no carrinho e saiu some. Não existe lembrete para essa pessoa.</p>
       </article>
       <article class="pain">
         <div class="n"><span>Motivo 4</span><i><svg class="ico"><use href="#i-glass"/></svg></i></div>
-        <div class="big">0</div>
         <h3>A degustação não está no site</h3>
         <p>O anúncio promete "degustação na faixa". Na página inicial, a palavra degustação aparece zero vezes.</p>
       </article>
@@ -1267,8 +1264,10 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
   let achadas = 0;
   const acende = i => {
     const c = cells[i]; if (c.classList.contains('on')) return;
-    c.classList.add('on'); stay.textContent = ++achadas;
-    if (achadas === 100) { cem.classList.add('all'); hint.textContent = 'Você encontrou as 100. É isso que o funil certo faz pela Durigan.'; }
+    c.classList.add('on');
+    if (!c.classList.contains('g')) return;
+    stay.textContent = ++achadas;
+    if (achadas === 53) { cem.classList.add('all'); hint.textContent = 'Você encontrou as 53. É isso que o funil certo faz pela Durigan.'; }
   };
   hoje.forEach((i, k) => setTimeout(() => acende(i), reduce ? 0 : 900 + k * 32));
   setTimeout(() => cem.classList.add('done'), reduce ? 0 : 900 + 47 * 32 + 300);

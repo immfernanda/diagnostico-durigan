@@ -6,10 +6,15 @@ Landing page de apresentação para a Vinícola Durigan (vinhosdurigan.com.br), 
 
 | Arquivo | O que é |
 |---|---|
-| `diagnostico-durigan.html` | A página inteira em um arquivo só. Logo e anúncios estão embutidos no próprio HTML. |
+| `index.html` | A página inteira em um arquivo só. Logo, fotos e anúncios estão embutidos no próprio HTML. |
+| `diagnostico-durigan.html` | Redireciona para a página (o endereço antigo continua funcionando). |
+| `.github/workflows/deploy.yml` | Publica o site no GitHub Pages a cada push na `main`. |
 | `benchmark-durigan-2026-10.csv` | Planilha do benchmark com as 10 marcas (abre no Excel). |
 
 ## Versão publicada
+
+Site: https://immfernanda.github.io/diagnostico-durigan/
+
 
 https://claude.ai/artifact/Ag4nfX9iuRw6wmbcKS1zbk (privada; compartilhar pelo menu Share)
 

@@ -406,14 +406,18 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
 .cem-say{font:600 clamp(1.05rem,1.6vw,1.25rem)/1.35 var(--f-head);letter-spacing:-.02em;opacity:0;translate:0 10px;transition:opacity .7s,translate .7s}
 .cem-say em{color:var(--gold)}
 .cem.done .cem-say{opacity:1;translate:0 0}
+.cem-re{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:.9rem;color:var(--on-deep-muted);line-height:1.5;opacity:0;transition:opacity .7s .3s}
+.cem-re .ico{color:var(--gold);margin-top:4px}
+.cem-re b{color:var(--on-deep)}
+.cem.done .cem-re{opacity:1}
 .cem-k{font:600 clamp(1rem,1.5vw,1.15rem)/1.4 var(--f-head);letter-spacing:-.01em;color:var(--on-deep);max-width:34ch}
 .cem-k b{color:var(--gold);font-weight:800}
-.dots{cursor:pointer;touch-action:manipulation}
+.dots{cursor:pointer;touch-action:pan-y}
 .dots i{opacity:.08}
 .cem-hint{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:600;color:var(--gold);opacity:0;transition:opacity .6s .4s}
 .cem.done .cem-hint{opacity:1}
-.cem.all .cem-hint{color:#8EE0B8}
-.cem.all .cem-hint .pulse{background:#8EE0B8}
+.cem.achou .cem-hint{color:#8EE0B8}
+.cem.achou .cem-hint .pulse{background:#8EE0B8}
 .cem-leg{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.84rem;color:var(--on-deep-muted)}
 .cem-leg span{display:inline-flex;align-items:center;gap:8px}
 .cem-leg i{width:10px;height:10px;border-radius:50%;background:var(--on-deep)}
@@ -665,6 +669,7 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
       <div class="dots" id="dots" aria-hidden="true"></div>
       <p class="cem-hint"><span class="pulse"></span><span id="cemHint"></span></p>
       <p class="cem-say">Vou ajudar a Durigan a ser <em>encontrada por quem já procura vinho</em>.</p>
+      <p class="cem-re"><svg class="ico"><use href="#i-replay"/></svg><span>E mesmo quem chega e não compra não fica perdido: entra no <b>remarketing</b> e volta a ver a Durigan no Instagram, no Google e no WhatsApp.</span></p>
       <div class="cem-leg"><span><i></i>chegam hoje</span><span><i class="g"></i>hoje desistem, mas podem chegar com o funil certo</span></div>
     </div>
   </div>
@@ -1260,14 +1265,14 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
   const hoje = order.slice(0, 47), mais = order.slice(47);
   mais.forEach(i => cells[i].classList.add('g'));
   const hint = document.getElementById('cemHint'), toque = matchMedia('(hover: none)').matches;
-  hint.textContent = (toque ? 'Toque' : 'Passe o mouse') + ' nas taças apagadas e encontre quem a Durigan está perdendo.';
+  hint.textContent = (toque ? 'Passe o dedo' : 'Passe o mouse') + ' nas taças apagadas e encontre quem a Durigan está perdendo.';
   let achadas = 0;
   const acende = i => {
     const c = cells[i]; if (c.classList.contains('on')) return;
     c.classList.add('on');
     if (!c.classList.contains('g')) return;
     stay.textContent = ++achadas;
-    if (achadas === 53) { cem.classList.add('all'); hint.textContent = 'Você encontrou as 53. É isso que o funil certo faz pela Durigan.'; }
+    if (achadas === 53) { cem.classList.add('achou'); hint.textContent = 'Você encontrou as 53. É isso que o funil certo faz pela Durigan.'; }
   };
   hoje.forEach((i, k) => setTimeout(() => acende(i), reduce ? 0 : 900 + k * 32));
   setTimeout(() => cem.classList.add('done'), reduce ? 0 : 900 + 47 * 32 + 300);
@@ -1278,6 +1283,7 @@ table.bm{width:100%;border-collapse:collapse;min-width:860px;font-size:.95rem}
   };
   dots.addEventListener('pointermove', e => procura(e, .85));
   dots.addEventListener('pointerdown', e => procura(e, 1.7));
+  dots.addEventListener('touchmove', e => procura(e.touches[0], 1.1), { passive: true });
 
   /* ---------- logo, WhatsApp e página de campanha ---------- */
   const logo = document.querySelector('.brand img').src;
